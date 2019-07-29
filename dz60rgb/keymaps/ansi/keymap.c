@@ -73,13 +73,13 @@ uint32_t default_layer_state_set_user(uint32_t state) {
 /* uint32_t layer_state_set_user(uint32_t state) { */
     switch (biton32(state)) {
     case LAYER_OVE:
-      rgblight_mode(RGB_MATRIX_CUSTOM_OVERWATCH);
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_OVERWATCH);
       break;
     case LAYER_WIN:
-      rgblight_mode(RGB_MATRIX_CUSTOM_WINDOWS);
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_WINDOWS);
       break;
     default:
-      rgblight_mode(RGB_MATRIX_CUSTOM_DEFAULT);
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_DEFAULT);
       break;
     }
   return state;
@@ -88,7 +88,7 @@ uint32_t default_layer_state_set_user(uint32_t state) {
 uint32_t layer_state_set_user(uint32_t state) {
     switch (biton32(state)) {
     case LAYER_CFG:
-      rgblight_mode(RGB_MATRIX_CUSTOM_CONFIG);
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_CONFIG);
       break;
     default:
       default_layer_state_set_user(default_layer_state);
