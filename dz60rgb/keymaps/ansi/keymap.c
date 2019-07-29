@@ -69,22 +69,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-// mod 2 = gold
-// mod 3 = cyan
-// mod 4 = white
-// mod 5 = coral
-
 uint32_t default_layer_state_set_user(uint32_t state) {
 /* uint32_t layer_state_set_user(uint32_t state) { */
     switch (biton32(state)) {
     case LAYER_OVE:
-      rgblight_mode(2);
+      rgblight_mode(RGB_MATRIX_CUSTOM_OVERWATCH);
       break;
     case LAYER_WIN:
-      rgblight_mode(5);
+      rgblight_mode(RGB_MATRIX_CUSTOM_WINDOWS);
       break;
     default:
-      rgblight_mode(3);
+      rgblight_mode(RGB_MATRIX_CUSTOM_DEFAULT);
       break;
     }
   return state;
@@ -93,9 +88,10 @@ uint32_t default_layer_state_set_user(uint32_t state) {
 uint32_t layer_state_set_user(uint32_t state) {
     switch (biton32(state)) {
     case LAYER_CFG:
-      rgblight_mode(4);
+      rgblight_mode(RGB_MATRIX_CUSTOM_CONFIG);
       break;
     default:
+      default_layer_state_set_user(default_layer_state);
       break;
     }
   return state;
