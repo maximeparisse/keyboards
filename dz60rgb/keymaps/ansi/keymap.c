@@ -12,9 +12,9 @@
 #define MO_MOD MO(LAYER_MED)
 #define MO_CFG OSL(LAYER_CFG)
 
-#define DF_INI DF(LAYER_INI)
-#define DF_WIN DF(LAYER_WIN)
-#define DF_OVE DF(LAYER_OVE)
+#define TO_INI TO(LAYER_INI)
+#define TO_WIN TO(LAYER_WIN)
+#define TO_OVE TO(LAYER_OVE)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,    KC_TRNS,  KC_TRNS,                      KC_TRNS,                                  KC_TRNS,   KC_TRNS,   KC_TRNS,              KC_TRNS),
 
   [LAYER_MED] = LAYOUT_ANSI(
-    KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_VOLD,    KC_VOLU,   KC_MUTE,
+    KC_DEL,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_VOLD,    KC_VOLU,   KC_MUTE,
     KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_MPRV,    KC_MNXT,   KC_MPLY,
     KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,               KC_TRNS,
     KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,
@@ -62,16 +62,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_CFG] = LAYOUT_ANSI(
     RGB_MOD,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,      KC_NO,    KC_NO,    KC_NO,    KC_NO,     RGB_VAD,    RGB_VAI,   KC_NO,
-    KC_NO,      KC_NO,    DF_WIN,   KC_NO,    RESET,    KC_NO,    KC_NO,      KC_NO,    DF_INI,   DF_OVE,   KC_NO,     KC_NO,      KC_NO,     KC_NO,
+    KC_NO,      KC_NO,    TO_WIN,   KC_NO,    RESET,    KC_NO,    KC_NO,      KC_NO,    TO_INI,   TO_OVE,   KC_NO,     KC_NO,      KC_NO,     KC_NO,
     KC_NO,      KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,      KC_NO,    KC_NO,    KC_NO,    KC_NO,     KC_NO,                 KC_NO,
     KC_NO,      KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,      KC_NO,    KC_NO,    KC_NO,    KC_NO,     KC_NO,
     KC_NO,      KC_NO,    KC_NO,                        KC_NO,                                    KC_NO,    KC_NO,     KC_NO,                 KC_NO),
 
 };
 
-uint32_t default_layer_state_set_user(uint32_t state) {
-/* uint32_t layer_state_set_user(uint32_t state) { */
-    switch (biton32(state)) {
+uint32_t layer_state_set_user(uint32_t state) {
+  switch (biton32(state)) {
+    case LAYER_CFG:
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_CONFIG);
+      break;
     case LAYER_OVE:
       rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_OVERWATCH);
       break;
@@ -84,17 +86,3 @@ uint32_t default_layer_state_set_user(uint32_t state) {
     }
   return state;
 }
-
-uint32_t layer_state_set_user(uint32_t state) {
-    switch (biton32(state)) {
-    case LAYER_CFG:
-      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_CONFIG);
-      break;
-    default:
-      default_layer_state_set_user(default_layer_state);
-      break;
-    }
-  return state;
-}
-
-
