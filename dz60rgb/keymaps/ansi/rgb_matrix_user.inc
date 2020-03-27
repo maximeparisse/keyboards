@@ -4,11 +4,8 @@ RGB_MATRIX_EFFECT(OVERWATCH)
 RGB_MATRIX_EFFECT(DEFAULT)
 RGB_MATRIX_EFFECT(CONFIG)
 RGB_MATRIX_EFFECT(WINDOWS)
-/* RGB_MATRIX_EFFECT(bar) */
 
-// Define effects inside the `RGB_MATRIX_CUSTOM_EFFECT_IMPLS` ifdef block
 #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
-  // OVERWATCH
   static bool OVERWATCH(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
     for (uint8_t i = led_min; i < led_max; i++) {
@@ -17,7 +14,6 @@ RGB_MATRIX_EFFECT(WINDOWS)
     return led_max < DRIVER_LED_TOTAL;
   }
 
-  // DEFAULT
   static bool DEFAULT(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
     for (uint8_t i = led_min; i < led_max; i++) {
@@ -26,7 +22,6 @@ RGB_MATRIX_EFFECT(WINDOWS)
     return led_max < DRIVER_LED_TOTAL;
   }
 
-  // CONFIG
   static bool CONFIG(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
     for (uint8_t i = led_min; i < led_max; i++) {
@@ -35,7 +30,6 @@ RGB_MATRIX_EFFECT(WINDOWS)
     return led_max < DRIVER_LED_TOTAL;
   }
 
-  // WINDOWS
   static bool WINDOWS(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
     for (uint8_t i = led_min; i < led_max; i++) {
